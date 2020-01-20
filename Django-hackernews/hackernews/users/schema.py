@@ -31,10 +31,8 @@ class CreateUser(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
 
-# ...code
 
-
-class Query(graphene.AbstractType):
+class Query(graphene.ObjectType):
     me = graphene.Field(UserType)
     users = graphene.List(UserType)
 
@@ -44,6 +42,5 @@ class Query(graphene.AbstractType):
     def resolve_me(self, info):
         user = info.context.user
         if user.is_anonymous:
-            raise Exception('Not logged in!')
-
+            raise Exception('Not logged!')
         return user
